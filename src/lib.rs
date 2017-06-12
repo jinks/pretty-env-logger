@@ -22,6 +22,7 @@
 //! ```
 
 extern crate ansi_term;
+extern crate chrono;
 extern crate env_logger;
 extern crate log;
 
@@ -70,7 +71,9 @@ pub fn init() -> Result<(), log::SetLoggerError> {
         } else {
             MAX_MODULE_WIDTH.store(module_path.len(), Ordering::Relaxed);
         }
-        format!("{}:{}: {}",
+        let date = chrono::Local::now();
+        format!("{} {}:{}: {}",
+                date.format("[%H:%M:%S%.6f]"),
                 Level(record.level()),
                 Style::new().bold().paint(module_path),
                 record.args())
