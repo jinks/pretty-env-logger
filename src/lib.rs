@@ -73,7 +73,7 @@ pub fn init() -> Result<(), log::SetLoggerError> {
         }
         let date = chrono::Local::now();
         format!("{} {}:{}: {}",
-                date.format("[%H:%M:%S%.6f]"),
+                date.format("[%F %T]"),
                 Level(record.level()),
                 Style::new().bold().paint(module_path),
                 record.args())
